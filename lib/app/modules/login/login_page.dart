@@ -1,4 +1,6 @@
 import 'package:desafio/app/routes/home_routes.dart';
+import 'package:desafio/app/routes/recovery_routes.dart';
+import 'package:desafio/app/routes/register_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,12 +76,16 @@ class LoginPage extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAllNamed(RecoveryRoutes.recovery);
+                        },
                         child: const Text('Esqueceu a senha?',
                             style: TextStyle(fontSize: 15)),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAllNamed(RegisterRoutes.register);
+                        },
                         child: const Text('Cadastrar',
                             style: TextStyle(fontSize: 15)),
                       ),
