@@ -1,3 +1,4 @@
+import 'package:desafio/app/routes/login_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,11 +14,22 @@ class HomePage extends GetView<HomeController> {
         title: const Text('HomePage'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'HomePage is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Column(
+        children: [
+          const Center(
+            child: Text(
+              'HomePage is working',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Get.offAllNamed(LoginRoutes
+                  .login); //clicando no botão leva pra página do login
+            },
+            child: const Text('Login'),
+          ),
+        ],
       ),
     );
   }
