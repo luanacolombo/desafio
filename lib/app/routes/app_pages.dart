@@ -3,6 +3,7 @@ import 'login_routes.dart';
 import 'recovery_routes.dart';
 import 'register_routes.dart';
 import 'profile_routes.dart';
+import 'fetch_data_routes.dart';
 
 class AppPages {
   AppPages._();
@@ -15,5 +16,6 @@ class AppPages {
 		...RecoveryRoutes.routes,
 		...RegisterRoutes.routes,
 		...ProfileRoutes.routes,
+		...FetchDataRoutes.routes,
   ];
 }

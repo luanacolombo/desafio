@@ -1,3 +1,5 @@
+import 'package:desafio/app/core/helpers/validator.dart';
+import 'package:desafio/app/data/models/user_model.dart';
 import 'package:desafio/app/routes/login_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,7 @@ class RegisterPage extends GetView<RegisterController> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Form(
-            key: GlobalKey(),
+            key: controller.formKey,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +38,7 @@ class RegisterPage extends GetView<RegisterController> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                   TextFormField(
-                    controller: controller.nome,
+                    controller: controller.name,
                   ),
                   const SizedBox(
                     height: 50,
@@ -45,6 +47,7 @@ class RegisterPage extends GetView<RegisterController> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                   TextFormField(
+                    validator: Validator().email,
                     controller: controller.email,
                   ),
                   const SizedBox(
@@ -54,8 +57,9 @@ class RegisterPage extends GetView<RegisterController> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                   TextFormField(
+                    validator: Validator().password,
                     obscureText: true,
-                    controller: controller.senha,
+                    controller: controller.password,
                   ),
                   const SizedBox(
                     height: 90,
@@ -65,9 +69,16 @@ class RegisterPage extends GetView<RegisterController> {
                       backgroundColor: Colors.grey,
                       fixedSize: Size(Get.width, 40.0),
                     ),
-                    onPressed: () {
-                      Get.offAllNamed(LoginRoutes
-                          .login); //clicando no botão leva pra página do login
+                    onPressed: () async {
+                      if (controller.formKey.currentState!.validate()) {
+                        UserModel user = UserModel(
+                          name: controller.name.text,
+                          email: controller.email.text,
+                          password: controller.password.text,
+                        );
+                        controller.firebaseService
+                            .registerWithEmailAndPassword(user);
+                      }
                     },
                     child: const Text('Cadastrar'),
                   ),

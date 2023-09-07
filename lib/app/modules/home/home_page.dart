@@ -85,8 +85,7 @@ class HomePage extends GetView<HomeController> {
                       fixedSize: Size(Get.width, 40.0),
                     ),
                     onPressed: () {
-                      Get.offAllNamed(LoginRoutes
-                          .login); //clicando no botão leva pra página do login
+                      controller.firebaseService.signOut();
                     },
                     child: const Text('Sair'),
                   ),

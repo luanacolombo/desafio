@@ -1,3 +1,5 @@
+import 'package:desafio/app/core/helpers/validator.dart';
+import 'package:desafio/app/data/models/user_model.dart';
 import 'package:desafio/app/routes/home_routes.dart';
 import 'package:desafio/app/routes/recovery_routes.dart';
 import 'package:desafio/app/routes/register_routes.dart';
@@ -17,7 +19,7 @@ class LoginPage extends GetView<LoginController> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Form(
-            key: GlobalKey(),
+            key: controller.formKey,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,6 +40,7 @@ class LoginPage extends GetView<LoginController> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                   TextFormField(
+                    validator: Validator().email,
                     controller: controller.email,
                   ),
                   const SizedBox(
@@ -48,10 +51,11 @@ class LoginPage extends GetView<LoginController> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
                   TextFormField(
                     obscureText: true,
-                    controller: controller.senha,
+                    validator: Validator().password,
+                    controller: controller.password,
                     onChanged: (value) {
                       if (kDebugMode) {
-                        print(controller.senha.text);
+                        print(controller.password.text);
                       }
                     },
                   ),
@@ -63,9 +67,15 @@ class LoginPage extends GetView<LoginController> {
                       backgroundColor: Colors.grey,
                       fixedSize: Size(Get.width, 40.0),
                     ),
-                    onPressed: () {
-                      Get.offAllNamed(HomeRoutes
-                          .home); //clicando no botão leva pra página da home
+                    onPressed: () async {
+                      if (controller.formKey.currentState!.validate()) {
+                        UserModel user = UserModel(
+                          email: controller.email.text,
+                          password: controller.password.text,
+                        );
+                        controller.firebaseService
+                            .signInWithEmailAndPassword(user);
+                      }
                     },
                     child: const Text('Login'),
                   ),
