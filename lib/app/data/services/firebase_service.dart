@@ -61,7 +61,6 @@ class FirebaseService extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(
           email: user.email!.trim(), password: user.password!.trim());
-      return Get.offAllNamed(HomeRoutes.home);
     } catch (error) {
       Get.snackbar('Login Inválido!', 'Login Inválido!',
           snackPosition: SnackPosition.BOTTOM,
@@ -86,7 +85,6 @@ class FirebaseService extends GetxController {
         );
         //create the user in firestore
         _createUserFirestore(newUser, result.user!);
-        Get.offAllNamed(HomeRoutes.home);
       });
     } on FirebaseAuthException catch (error) {
       Get.snackbar('Erro de Login!', error.message!,
@@ -178,6 +176,5 @@ class FirebaseService extends GetxController {
   // Sign out
   void signOut() {
     _auth.signOut();
-    Get.offAllNamed(LoginRoutes.login);
   }
 }

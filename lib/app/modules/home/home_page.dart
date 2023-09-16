@@ -1,4 +1,3 @@
-import 'package:desafio/app/routes/login_routes.dart';
 import 'package:desafio/app/routes/profile_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

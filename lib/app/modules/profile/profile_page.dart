@@ -37,7 +37,7 @@ class ProfilePage extends GetView<ProfileController> {
                     controller: controller.name,
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   const Text('Email',
                       style:
@@ -45,6 +45,9 @@ class ProfilePage extends GetView<ProfileController> {
                   TextFormField(
                     validator: Validator().email,
                     controller: controller.email,
+                  ),
+                  const SizedBox(
+                    height: 40,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -61,6 +64,9 @@ class ProfilePage extends GetView<ProfileController> {
                       }
                     },
                     child: const Text('Salvar'),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
